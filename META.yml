@@ -1,0 +1,16 @@
+abstract: Run a callback after a file has been compiled
+author: Robert 'phaylon' Sedlacek <rs@474.at>
+build_requires: 
+  Test::More: 0.62
+distribution_type: module
+generated_by: Module::Install version 0.64
+license: perl
+name: Filter-EOF
+no_index: 
+  directory: 
+    - examples
+    - inc
+    - t
+requires: 
+  Filter::Util::Call: 1.0601
+version: 0.01
