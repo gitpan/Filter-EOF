@@ -16,6 +16,9 @@ sub import {
         $SimpleTest::TEST_PHASE = 'run';
 
         push @{ $SimpleTest::TEST_ORDER }, 'on_eof';
+
+        my $source = shift;
+        $$source .= ";\n\$TEST_MODIFICATION = 1;\n1;\n";
     });
 
     $SimpleTest::TEST_ON_IMPORT       = 1;

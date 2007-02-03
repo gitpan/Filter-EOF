@@ -2,7 +2,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 11;
+use Test::More tests => 12;
 
 use FindBin;
 use lib "$FindBin::Bin/lib";
@@ -55,4 +55,12 @@ ok( SimpleTest->can('test_export'),
     'function was exported from filter');
 is( SimpleTest->test_export, 23,
     'correct function was exported');
+
+#
+#   MODIFICATION WORKS
+#
+
+ok( $SimpleTest::TEST_MODIFICATION,
+    'source code modification through @_ works');
+
 

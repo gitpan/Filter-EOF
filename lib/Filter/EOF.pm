@@ -11,11 +11,11 @@ use strict;
 
 =head1 VERSION
 
-0.01
+0.02
 
 =cut
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 =head1 SYNOPSIS
 
@@ -79,21 +79,37 @@ Call this method in your own C<import> method to register a code
 reference that should be called when the file C<use>ing yours was
 compiled.
 
+The code reference will get a scalar reference as first argument
+to an empty string. if you change this string to something else,
+it will be appended at the end of the source.
+
+  # call C<some_function()> after runtime.
+  Filter->on_eof_call(sub { 
+      my $append = shift;
+      $$append .= '; some_function(); 1;';
+  });
+
 =cut
 
 sub on_eof_call {
     my ($class, $code) = @_;
 
+    my $past_eof;
     filter_add( sub {
         my $status = filter_read;
-        $code->() if $status == 0;
+        return $status if $past_eof;
+        if ($status == 0) {
+            $code->(\$_);
+            $status   = 1;
+            $past_eof = 1;
+        }
         return $status;
     });
 }
 
 =head1 EXAMPLES
 
-You can find the example mentioned in L<SYNOPSIS> in the distribution
+You can find the example mentioned in L</SYNOPSIS> in the distribution
 directory C<examples/synopsis/>.
 
 =head1 SEE ALSO

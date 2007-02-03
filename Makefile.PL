@@ -8,6 +8,7 @@ name            q{Filter-EOF};
 license         q{perl};
 author          q{Robert 'phaylon' Sedlacek <rs@474.at>};
 all_from        q{lib/Filter/EOF.pm};
+version_from    q{lib/Filter/EOF.pm};
 no_index        directory => q{examples};
 
 requires        q{Filter::Util::Call},  '1.0601';

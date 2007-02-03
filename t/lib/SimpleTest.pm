@@ -14,6 +14,8 @@ our (
     $TEST_PHASE,
     $TEST_COMPILETIME,
     $TEST_RUNTIME,
+
+    $TEST_MODIFICATION,
 );
 
 use SimpleFilter foo => 23, bar => 13;
