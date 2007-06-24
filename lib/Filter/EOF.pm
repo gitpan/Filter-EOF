@@ -11,11 +11,11 @@ use strict;
 
 =head1 VERSION
 
-0.02
+0.03
 
 =cut
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 =head1 SYNOPSIS
 
@@ -69,9 +69,40 @@ processed.
 
 =cut
 
+use Carp;
 use Filter::Util::Call;
 
 =head1 METHODS
+
+=head2 C<import( @functions )>
+
+Currently, only a function equivalent of the C<on_eof_call> method
+is provided for export.
+
+  use Filter::EOF qw( on_eof_call );
+
+  sub import {
+      my ($class) = @_;
+      ...
+      on_eof_call { ... };
+  }
+  ...
+
+=cut
+
+my %Export = (
+    on_eof_call => sub { my $class = shift; sub (&) { $class->on_eof_call(@_) } },
+);
+
+sub import {
+    my ($class, @names) = @_;
+    for my $name (@names) {
+        Carp::croak "Unknown function '$name'" unless exists $Export{ $name };
+        no strict 'refs';
+        *{ scalar(caller) . '::' . $name } = $Export{ $name }->($class);
+    }
+    return 1;
+}
 
 =head2 C<on_eof_call( $code_ref )>
 
@@ -106,6 +137,12 @@ sub on_eof_call {
         return $status;
     });
 }
+
+=head1 EXPORTS
+
+=head2 on_eof_call
+
+You can optionally import the C<on_eof_call> function into your namespace.
 
 =head1 EXAMPLES
 

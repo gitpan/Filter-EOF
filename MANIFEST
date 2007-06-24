@@ -20,6 +20,8 @@ t/01-pod.t
 t/02-pod-coverage.t
 t/10-simple.t
 t/11-two-levels.t
+t/12-import.t
+t/lib/ExportTest.pm
 t/lib/LevelFilter.pm
 t/lib/LevelTest.pm
 t/lib/RealLevelFilter.pm

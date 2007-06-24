@@ -12,6 +12,7 @@ version_from    q{lib/Filter/EOF.pm};
 no_index        directory => q{examples};
 
 requires        q{Filter::Util::Call},  '1.0601';
+requires        q{Carp},                0;
 build_requires  q{Test::More},          '0.62';
 
 WriteAll;
