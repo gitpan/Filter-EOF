@@ -2,7 +2,7 @@ NAME
     Filter::EOF - Run a callback after a file has been compiled
 
 VERSION
-    0.03
+    0.04
 
 SYNOPSIS
       package MyPackage;

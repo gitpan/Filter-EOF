@@ -17,5 +17,5 @@ no_index:
     - t
 requires: 
   Carp: 0
-  Filter::Util::Call: 1.0601
-version: 0.03
+  Filter::Util::Call: 1.06
+version: 0.04
